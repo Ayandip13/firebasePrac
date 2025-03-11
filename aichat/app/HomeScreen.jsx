@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   FlatList,
   Image,
   StyleSheet,
@@ -15,14 +16,13 @@ const HomeScreen = () => {
 
   useEffect(() => {
     setChatFaceData(chatFaceItems);
-    setSelectedChatFaceData(chatFaceItems[3]);
+    setSelectedChatFaceData(chatFaceItems[0]);
   }, []);
   console.log(chatFaceData);
 
-
-  const onChatFacePress = () => {
-    
-  }
+  const onChatFacePress = (id) => {
+    setSelectedChatFaceData(chatFaceData[id - 1]);
+  };
 
   return (
     <View style={{ alignItems: "center", paddingTop: 70 }}>
@@ -61,7 +61,7 @@ const HomeScreen = () => {
           horizontal
           renderItem={({ item }) =>
             selectedChatFaceData.id != item.id && (
-              <TouchableOpacity onPress={()=>onChatFacePress(item.id)}>
+              <TouchableOpacity onPress={() => onChatFacePress(item.id)}>
                 <Image source={item.image} style={{ height: 70, width: 70 }} />
               </TouchableOpacity>
             )
@@ -71,6 +71,20 @@ const HomeScreen = () => {
           Choose your favourite Chatbuddy
         </Text>
       </View>
+      <TouchableOpacity
+        style={[
+          {
+            backgroundColor: selectedChatFaceData.primary,
+            padding: 18,
+            width: Dimensions.get("screen").width * 0.6,
+            borderRadius: 18,
+            alignItems: "center",
+            marginTop:30
+          },
+        ]}
+      >
+        <Text style={{ fontSize: 16, color: "#fff" }}>Let's Chat</Text>
+      </TouchableOpacity>
     </View>
   );
 };
