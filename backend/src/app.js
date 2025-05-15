@@ -1,5 +1,8 @@
-const express = require("express");
+import express from "express";
+import aiRoutes from "./routes/ai.routes.js";
 
 const app = express();
 
-module.exports = app;
+app.use("/ai", aiRoutes);
+
+export default app;
